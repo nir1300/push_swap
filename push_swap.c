@@ -18,7 +18,7 @@ int find_max(t_list **a)
 	return (max);
 }
 
-void find_median(t_list **a)
+ int find_median(t_list **a)
 {
 	int len = ft_lstsize(*a);
 	int median;
@@ -33,33 +33,40 @@ void find_median(t_list **a)
 	return (median);
 }
 
+void sort_b(t_list **b)
+{
+	while ((*b) && (*b)->next && *(int *)(*b)->content > *(int *)(*b)->next->content)
+		ft_rrb;
+}
+
 void pop(t_list **a, t_list **b)
 {
 	
 	t_list *current = *a;
 	t_list *current_b = *b;
-	int len = find_max(a);
+	int len = ft_lstsize(*a);
+	int i = 0;
 	int median = find_median(a);
-	while (current != NULL)
+	while (i < len)
 	{
-		if (*(int *)current->content < median)
+		if (*a == NULL)
+			break;
+		if (*(int *)(*a)->content < median)
 		{
 			ft_pb(a, b);
-			if ((*b) > (*b)->next)
+			if ((*b) && (*b)->next && *(int *)(*b)->content < *(int *)(*b)->next->content)
 			{
 				ft_sb(b);
-				while ((*b) > (*b)->next)
 			}
 
-		current = current->next;
+		}
+		else
+			ft_ra(a);
+		i++;
 	}
-
 }
 
-void ms_sort(t_list **b)
-{
 
-}
 
 int	main(void)
 {
@@ -78,8 +85,10 @@ int	main(void)
 	ft_lstadd_back(&list, ft_lstnew(&num4));
 	ft_lstadd_back(&list, ft_lstnew(&num5));
 
-	find_median(&list);
-	// print_list(list);
+	print_list(list);
+	pop(&list, &list_b);
+	print_list(list);
+	print_list(list_b);
     // ft_sa(&list);
     // print_list(list);
     // ft_pb(&list, &list_b);
