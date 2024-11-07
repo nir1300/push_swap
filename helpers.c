@@ -1,5 +1,38 @@
 #include "push_swap.h"
 
+int	ft_isdigit(int a)
+{
+	if (a >= 48 && a <= 57)
+		return (2048);
+	else
+		return (0);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	n;
+	int	i;
+	int	sign;
+
+	i = 0;
+	n = 0;
+	sign = 1;
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		n = n * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (n * sign);
+}
+
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	new->next = *lst;
@@ -20,6 +53,8 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
+
+
 
 t_list	*ft_lstnew(void *content)
 {

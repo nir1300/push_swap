@@ -4,6 +4,8 @@
 // sort 500 numbers in less than 5500 operations
 
 //find max and sort everything into b
+// doubly linked list (new struct with prev)
+// circular list
 
 int find_max(t_list **a)
 {
@@ -66,48 +68,47 @@ void pop(t_list **a, t_list **b)
 	}
 }
 
+// void up_to_3(t_list **a, t_list **b)
+// {
+// 	ft_pb(a);
+// 	if (*(int *)(*a)->content > *(int *)(*a)->next->content)
 
+// }
 
-int	main(void)
+void create_list(t_list *list_a, int argc, char *argv[])
 {
-	t_list	*list = NULL;
-    t_list *list_b = NULL;
+	int i = 1;
+	list_a = ft_lstnew(argv[i]);
+	while (i++ < argc)
+		ft_lstadd_back(&list_a, ft_lstnew(argv[i]));
+}
 
-	int	num1 = 6;
-	int	num2 = 5;
-	int	num3 = 8;
-	int	num4 = 3;
-	int	num5 = 14;
-
-	ft_lstadd_back(&list, ft_lstnew(&num1));
-	ft_lstadd_back(&list, ft_lstnew(&num2));
-	ft_lstadd_back(&list, ft_lstnew(&num3));
-	ft_lstadd_back(&list, ft_lstnew(&num4));
-	ft_lstadd_back(&list, ft_lstnew(&num5));
-
-	print_list(list);
-	pop(&list, &list_b);
-	print_list(list);
-	print_list(list_b);
-    // ft_sa(&list);
-    // print_list(list);
-    // ft_pb(&list, &list_b);
-    // print_list(list_b);
-	// print_list(list);
-	// ft_pa(&list, &list_b);
-    // print_list(list_b);
-	// print_list(list);
-	// // ft_ra(&list);
-	// // print_list(list);
-	// // ft_rra(&list);
-	// // print_list(list);
-	// // Freeing the list
-	// t_list *temp;
-	// while (list)
-	// {
-	// 	temp = list;
-	// 	list = list->next;
-	// 	free(temp);
-	// }
-	// return 0;
+int main(int argc, char *argv[])
+{
+	int i = 1;
+	int n = 0;
+	t_list	*list_a = NULL;
+	int *value;
+	if (argc < 2)
+		return (printf("Error, no input"), -1);
+	while (i < argc)
+	{
+		while (argv[i][n])
+		{
+			if (!ft_isdigit(argv[i][n]))
+			{
+				printf("Error, no number");
+				return (-1);
+			}
+			n++;
+		}
+		value = malloc(sizeof(int));
+		if (!value)
+			return (printf("memory allocation error"), -1);
+		*value = atoi(argv[i]);
+		ft_lstadd_back(&list_a, ft_lstnew(value));
+		i++;
+		n = 0;
+	}
+	print_list(list_a);
 }
