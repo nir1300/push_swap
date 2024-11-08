@@ -1,26 +1,22 @@
-CC = cc
-CFLAGS = -Wall -Werror -Wextra
+# Variables
+NAME = push_swap
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBFT_INC = $(LIBFT_DIR)
+CFILES = push_swap.c operations.c helpers.c
+OFILES = $(CFILES:.c=.o)
+CFLAGS = -I$(LIBFT_DIR) -I$(LIBFT_DIR)/printf
 
-SRC = push_swap.c operations.c helpers.c
-OBJ = $(SRC:.c=.o)
-NAME = push_swap
-
+# Targets
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
-
-$(LIBFT):
-	make -C $(LIBFT_DIR)
+$(NAME): $(OFILES)
+	cc $(OFILES) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(LIBFT_INC) -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OFILES)
 
 fclean: clean
 	rm -f $(NAME)

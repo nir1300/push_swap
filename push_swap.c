@@ -1,6 +1,7 @@
 #include "push_swap.h"
 #include "./libft/libft.h"
 #include "./libft/printf/ft_printf.h"
+
 // sort 100 numbers in less than 700 operations
 // sort 500 numbers in less than 5500 operations
 
