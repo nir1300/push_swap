@@ -35,19 +35,19 @@ void ft_ss(n_list **a, n_list **b)
 
 void ft_pa(n_list **a, n_list **b)
 {
-    if (*b == NULL)
+    if ((*b) == NULL)
         return ;
-	
     n_list *first = *b;
-	lstadd_front(a, first);
-	if ((*b)->next)
+	if ((*b) && (*b)->next)
 	{
-		(*b) = (*b)->next;
+		(*b)= (*b)->next;
 		(*b)->prev = NULL;
 	}
 	else
-		*b = NULL;
+		(*b) = NULL;
+	lstadd_front(a, first);
 }
+
 void ft_pb(n_list **a, n_list **b)
 {
     if ((*a) == NULL)
