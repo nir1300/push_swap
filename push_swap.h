@@ -20,8 +20,7 @@ void	lstadd_back(n_list **lst, n_list *new);
 n_list	*lstlast(n_list *lst);
 int	lstsize(n_list *lst);
 void print_list(n_list *lst);
-void ft_sa(n_list **lst);
-void ft_sb(n_list **lst);
+void	ft_swap(n_list **lst, char c);
 void ft_ss(n_list **a, n_list **b);
 void ft_pa(n_list **a, n_list **b);
 void ft_pb(n_list **a, n_list **b);
@@ -36,30 +35,8 @@ int find_median(n_list *a);
 void sort_b(n_list *b);
 void pop(n_list *a, n_list *b);
 int sorted(n_list *a, n_list *b);
-n_list *up_to_3(n_list *a, n_list *b);
+n_list *up_to_3(n_list *a);
+n_list *up_to_5(n_list *a, n_list *b);
 void create_list(n_list *list_a, int argc, char *argv[]);
 
 #endif
-
-/* void ft_sa(n_list **lst)
-{
-    if ((*lst) == NULL || (*lst)->next == NULL)
-	{
-    	return ;
-	}
-	n_list *head = *lst;
-	n_list *second = (*lst)->next;
-	
-	second->prev = NULL;
-	second->next = head;
-	head->prev = second;
-	if ((*lst)->next->next != NULL)
-	{
-		n_list *third = (*lst)->next->next;
-		head->next = third;
-		third->prev = head;
-	}
-	else
-		head->next = NULL;
-	*lst = second;
-} */

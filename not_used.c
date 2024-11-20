@@ -1,3 +1,39 @@
+// void ft_rra(n_list **a)
+// {
+// 	n_list *first = *a;
+// 	n_list *last = *a;
+// 	n_list *second_last = NULL;
+// 	if ((*a) == NULL || (*a)->next == NULL)
+// 		return ;
+// 	while (last->next != NULL)
+// 	{
+// 		second_last = last;
+// 		last = last->next;
+// 	}
+// 	second_last->next = NULL;
+// 	last->prev = NULL;
+// 	last->next = first;
+// 	first->prev = last;
+// 	(*a) = last;
+// }
+
+/* void ft_ra(n_list **a)
+{
+	if ((*a) == NULL || (*a)->next == NULL)
+		return ;
+	n_list *last = *a;
+	n_list *first = *a;
+	while (last->next != NULL)
+		last = last->next;
+	n_list *temp = last->prev;
+	last->next = first->next;
+	last->prev = NULL;
+	first->next = NULL;
+	first->prev = temp;
+	temp->next = first;
+	(*a) = last;
+} */
+
 /* int find_median(t_list **a)
 {
 	int len = ft_lstsize(*a);
