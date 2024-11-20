@@ -9,7 +9,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I $(LIBFT_DIR) -I .
 
 # Source files
-SRC = push_swap.c operations.c helpers.c bidirectional.c 
+SRC = push_swap.c operations.c helpers.c bidirectional.c tester.c
 
 OBJ = $(SRC:.c=.o)
 

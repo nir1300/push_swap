@@ -130,24 +130,24 @@ void ft_rr(n_list **a, n_list **b)
 	ft_rb(b);
 }
 
-void ft_rra(n_list **a)
-{
-	n_list *first = *a;
-	n_list *last = *a;
-	n_list *second_last = NULL;
-	if ((*a) == NULL || (*a)->next == NULL)
-		return ;
-	while (last->next != NULL)
-	{
-		second_last = last;
-		last = last->next;
-	}
-	second_last->next = NULL;
-	last->prev = NULL;
-	last->next = first;
-	first->prev = last;
-	(*a) = last;
-}
+// void ft_rra(n_list **a)
+// {
+// 	n_list *first = *a;
+// 	n_list *last = *a;
+// 	n_list *second_last = NULL;
+// 	if ((*a) == NULL || (*a)->next == NULL)
+// 		return ;
+// 	while (last->next != NULL)
+// 	{
+// 		second_last = last;
+// 		last = last->next;
+// 	}
+// 	second_last->next = NULL;
+// 	last->prev = NULL;
+// 	last->next = first;
+// 	first->prev = last;
+// 	(*a) = last;
+// }
 
 void ft_rrb(n_list **b)
 {
