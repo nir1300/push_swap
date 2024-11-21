@@ -34,7 +34,7 @@ int find_max(n_list *a);
 int find_median(n_list *a);
 void sort_b(n_list *b);
 void pop(n_list *a, n_list *b);
-int sorted(n_list *a, n_list *b);
+int sorted(n_list *a, n_list *b, int orig_len);
 n_list *up_to_3(n_list *a);
 n_list *up_to_5(n_list *a, n_list *b);
 void create_list(n_list *list_a, int argc, char *argv[]);

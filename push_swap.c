@@ -107,10 +107,11 @@ int sorted_a(n_list *a)
 }
 
 
-int sorted(n_list *a, n_list *b)
+int sorted(n_list *a, n_list *b, int orig_len)
 {
 	n_list *temp = a;
-	if (b != NULL)
+	int len = lstsize(a);
+	if (b != NULL || orig_len != len)
 		return (0);
 	while (temp && temp->next)
 	{
@@ -188,49 +189,49 @@ void create_list(n_list *list_a, int argc, char *argv[])
 
 // int check_limits(char *argv[])
 
-// int main(int argc, char *argv[])
-// {
-// 	int i = 1;
-// 	int n = 0;
-// 	n_list	*list_a = NULL;
-// 	n_list	*list_b = NULL;
-// 	int *value;
-// 	if (argc < 2)
-// 		return (printf("Error, no input\n"), -1);
-// 	while (i < argc)
-// 	{
-// 		// for checking int min and int max, use atoi and atol and compare if output is the same
-// 		// check for duplicates not sure how yet
-// 		if (argv[i][0] == '-')
-// 			n++;
-// 		while (argv[i][n])
-// 		{
-// 			if (!ft_isdigit(argv[i][n]))
-// 			{
-// 				printf("Error, no number\n");
-// 				return (-1);
-// 			}
-// 			n++;
-// 		}
-// 		value = malloc(sizeof(int));
-// 		if (!value)
-// 			return (printf("memory allocation error\n"), -1);
-// 		*value = atoi(argv[i]);
-// 		lstadd_back(&list_a, lstnew(*value));
-// 		i++;
-// 		n = 0;
-// 	}
-// 	int len = lstsize(list_a);
-// 	if (len == 1 || sorted(list_a, list_b))
-// 		return (printf("Already sorted\n"), 0);
-// 	/* print_list(list_a); */
-// 	if (len <= 3)
-// 		list_a = up_to_3(list_a, list_b);
-// 	if (len > 3 && len <= 5)
-// 		list_a = up_to_5(list_a, list_b);
-//  	print_list(list_a);
-// 	if (sorted(list_a, list_b))
-// 		printf("sorted\n");
-// 	else
-// 		ft_printf("not sorted\n");
-// }
+int main(int argc, char *argv[])
+{
+	int i = 1;
+	int n = 0;
+	n_list	*list_a = NULL;
+	n_list	*list_b = NULL;
+	int *value;
+	if (argc < 2)
+		return (printf("Error, no input\n"), -1);
+	while (i < argc)
+	{
+		// for checking int min and int max, use atoi and atol and compare if output is the same
+		// check for duplicates not sure how yet
+		if (argv[i][0] == '-')
+			n++;
+		while (argv[i][n])
+		{
+			if (!ft_isdigit(argv[i][n]))
+			{
+				printf("Error, no number\n");
+				return (-1);
+			}
+			n++;
+		}
+		value = malloc(sizeof(int));
+		if (!value)
+			return (printf("memory allocation error\n"), -1);
+		*value = ft_atoi(argv[i]);
+		lstadd_back(&list_a, lstnew(*value));
+		i++;
+		n = 0;
+	}
+	int len = lstsize(list_a);
+	if (len == 1 || sorted(list_a, list_b, len))
+		return (printf("Already sorted\n"), 0);
+	/* print_list(list_a); */
+	if (len <= 3)
+		list_a = up_to_3(list_a);
+	if (len > 3 && len <= 5)
+		list_a = up_to_5(list_a, list_b);
+ 	print_list(list_a);
+	if (sorted(list_a, list_b, len))
+		printf("sorted\n");
+	else
+		ft_printf("not sorted\n");
+}
