@@ -1,93 +1,71 @@
-// #include "push_swap.h"
-// #include "libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tester.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrumpfhu <nrumpfhu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 22:19:58 by nrumpfhu          #+#    #+#             */
+/*   Updated: 2025/01/15 03:55:54 by nrumpfhu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// int main(int argc, char *argv[])
-// {
-// 	int i = 1;
-// 	int n = 0;
-// 	n_list	*list_a = NULL;
-// 	n_list	*list_b = NULL;
-// 	int *value;
-// 	if (argc < 2)
-// 		return (printf("Error, no input\n"), -1);
-// 	while (i < argc)
-// 	{
-// 		if (argv[i][0] == '-')
-// 			n++;
-// 		while (argv[i][n])
-// 		{
-// 			if (!ft_isdigit(argv[i][n]))
-// 			{
-// 				printf("Error, no number\n");
-// 				return (-1);
-// 			}
-// 			n++;
-// 		}
-// 		value = malloc(sizeof(int));
-// 		if (!value)
-// 			return (printf("memory allocation error\n"), -1);
-// 		*value = atoi(argv[i]);
-// 		lstadd_back(&list_a, lstnew(*value));
-// 		i++;
-// 		n = 0;
-// 	}
-// 	int len = lstsize(list_a);
-// 	if (len == 1 || sorted(list_a, list_b))
-// 		return (printf("Already sorted\n"), 0);
-//     ft_printf("Init a: ");
-// 	print_list(list_a);
-//     ft_printf("Init b: ");
-// 	print_list(list_b);
-//     ft_sa(&list_a);
-//     ft_printf("sa: ");
-//     print_list(list_a);
-//     ft_pb(&list_a, &list_b);
-//     ft_pb(&list_a, &list_b);
-//     ft_pb(&list_a, &list_b);
-//     ft_printf("pb pb pb a: ");
-//     print_list(list_a);
-//     ft_printf("b: ");
-//     print_list(list_b);
-//     ft_rr(&list_a, &list_b);
-//     ft_printf("rr a: ");
-//     print_list(list_a);
-//     printf("b: ");
-//     print_list(list_b);
-//     ft_rrr(&list_a, &list_b);
-//     ft_printf("rrr a: ");
-//     print_list(list_a);
-//     ft_printf("b: ");
-//     print_list(list_b);
-//     ft_sa(&list_a);
-//     ft_printf("sa a: ");
-//     print_list(list_a);
-//     ft_printf("b: ");
-//     print_list(list_b);
-//     // pa is the root of the issue
-//     ft_pa(&list_a, &list_b);
-//     ft_printf("First a: ");
-//     print_list(list_a);
-//     ft_printf("First b: ");
-//     print_list(list_b);
-//     ft_pa(&list_a, &list_b);
-//     ft_printf("Second a: ");
-//     print_list(list_a);
-//     ft_printf("Second b: ");
-//     print_list(list_b);
-//     ft_pa(&list_a, &list_b);
-//     ft_printf("Third a: ");
-//     print_list(list_a);
-//     ft_printf("Third b: ");
-//     print_list(list_b);
+#include "libft/libft.h"
+#include "push_swap.h"
 
+void	free_array(char **arr)
+{
+	int	i;
 
-// 	// if (len <= 3)
-// 	// 	list_a = up_to_3(list_a, list_b);
-// 	// if (len > 3 && len <= 5)
-// 	// 	list_a = up_to_5(list_a, list_b);
-//  	// print_list(list_a);
-// 	if (sorted(list_a, list_b))
-// 		printf("sorted\n");
-// 	else
-// 		ft_printf("not sorted\n");
-// }
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+		i++;
+	while (i >= 0)
+	{
+		free(arr[i]);
+		i--;
+	}
+	free(arr);
+}
+
+t_lst	*create_list(int argc, char **args, t_lst *a)
+{
+	int		i;
+	t_lst	*value;
+
+	i = 0;
+	while (args[i])
+	{
+		value = lstnew(ft_atoi(args[i]));
+		if (!value)
+		{
+			free_list(&a);
+			exit(1);
+		}
+		lstadd_back(&a, value);
+		i++;
+	}
+	if (argc == 2 && lstsize(a) != 1)
+		free_array(args);
+	if (sorted(a))
+	{
+		free_list(&a);
+		exit(0);
+	}
+	return (a);
+}
+
+int	lstsize(t_lst *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

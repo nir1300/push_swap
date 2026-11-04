@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrumpfhu <nrumpfhu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 22:18:04 by nrumpfhu          #+#    #+#             */
+/*   Updated: 2024/12/05 18:23:27 by nrumpfhu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "push_swap.h"
 
-void	ft_swap(n_list **lst, char c)
+void	ft_swap(t_lst **lst, char c)
 {
-	n_list	*head;
-	n_list	*second;
-	n_list	*third;
+	t_lst	*head;
+	t_lst	*second;
+	t_lst	*third;
+
 	if (!lst || (*lst) == NULL || (*lst)->next == NULL)
 		return ;
 	head = *lst;
@@ -24,19 +37,9 @@ void	ft_swap(n_list **lst, char c)
 		ft_printf("sb\n");
 }
 
-void	ft_ss(n_list **a, n_list **b)
+void	ft_pa(t_lst **a, t_lst **b)
 {
-	if ((*a) == NULL || (*a)->next == NULL || (*b) == NULL
-		|| (*b)->next == NULL)
-		return ;
-	ft_swap(a, 'c');
-	ft_swap(b, 'c');
-	ft_printf("ss\n");
-}
-
-void	ft_pa(n_list **a, n_list **b)
-{
-	n_list	*first;
+	t_lst	*first;
 
 	if ((*b) == NULL)
 		return ;
@@ -52,10 +55,10 @@ void	ft_pa(n_list **a, n_list **b)
 	ft_printf("pa\n");
 }
 
-void	ft_pb(n_list **a, n_list **b)
+void	ft_pb(t_lst **a, t_lst **b)
 {
-	n_list	*first;
-	n_list	*second;
+	t_lst	*first;
+	t_lst	*second;
 
 	if ((*a) == NULL)
 		return ;
@@ -67,11 +70,36 @@ void	ft_pb(n_list **a, n_list **b)
 	ft_printf("pb\n");
 }
 
-void	ft_rra(n_list **a)
+void	ft_ra(t_lst **a, char c)
 {
-	n_list	*first;
-	n_list	*last;
-	n_list	*second_last;
+	t_lst	*last;
+	t_lst	*first;
+	t_lst	*temp;
+
+	if ((*a) == NULL || (*a)->next == NULL)
+		return ;
+	last = *a;
+	first = *a;
+	while (last->next != NULL)
+		last = last->next;
+	temp = first->next;
+	temp->prev = NULL;
+	temp->next = first->next->next;
+	first->next = NULL;
+	first->prev = last;
+	last->next = first;
+	(*a) = temp;
+	if (c == 'a')
+		ft_printf("ra\n");
+	else if (c == 'b')
+		ft_printf("rb\n");
+}
+
+void	ft_rra(t_lst **a, char c)
+{
+	t_lst	*first;
+	t_lst	*last;
+	t_lst	*second_last;
 
 	first = *a;
 	last = *a;
@@ -88,55 +116,8 @@ void	ft_rra(n_list **a)
 	last->next = first;
 	first->prev = last;
 	(*a) = last;
-}
-
-void	ft_ra(n_list **a)
-{
-	n_list	*last;
-	n_list	*first;
-	n_list	*temp;
-
-	if ((*a) == NULL || (*a)->next == NULL)
-		return ;
-	last = *a;
-	first = *a;
-	while (last->next != NULL)
-		last = last->next;
-	temp = first->next;
-	temp->prev = NULL;
-	temp->next = first->next->next;
-	first->next = NULL;
-	first->prev = last;
-	last->next = first;
-	(*a) = temp;
-}
-
-void	ft_rb(n_list **b)
-{
-	if ((*b) == NULL || (*b)->next == NULL)
-		return ;
-	ft_ra(b);
-}
-
-void	ft_rr(n_list **a, n_list **b)
-{
-	if ((*a) == NULL || (*a)->next == NULL || (*b) == NULL
-		|| (*b)->next == NULL)
-		return ;
-	ft_ra(a);
-	ft_rb(b);
-}
-
-void	ft_rrb(n_list **b)
-{
-	ft_rra(b);
-}
-
-void	ft_rrr(n_list **a, n_list **b)
-{
-	if ((*a) == NULL || (*a)->next == NULL || (*b) == NULL
-		|| (*b)->next == NULL)
-		return ;
-	ft_rra(a);
-	ft_rrb(b);
+	if (c == 'a')
+		ft_printf("rra\n");
+	else if (c == 'b')
+		ft_printf("rrb\n");
 }

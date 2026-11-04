@@ -1,42 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrumpfhu <nrumpfhu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 22:27:56 by nrumpfhu          #+#    #+#             */
+/*   Updated: 2025/01/15 03:58:07 by nrumpfhu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
 # include "libft/libft.h"
 
 typedef struct a_list
 {
 	int				content;
+	int				pos;
+	int				chunk_nb;
 	struct a_list	*next;
-    struct a_list   *prev;
-}					n_list;
+	struct a_list	*prev;
+}					t_lst;
 
-n_list	*lstnew(int content);
-void	lstadd_front(n_list **lst, n_list *new);
-void	lstadd_back(n_list **lst, n_list *new);
-n_list	*lstlast(n_list *lst);
-int	lstsize(n_list *lst);
-void print_list(n_list *lst);
-void	ft_swap(n_list **lst, char c);
-void ft_ss(n_list **a, n_list **b);
-void ft_pa(n_list **a, n_list **b);
-void ft_pb(n_list **a, n_list **b);
-void ft_ra(n_list **a);
-void ft_rb(n_list **b);
-void ft_rr(n_list **a, n_list **b);
-void ft_rra(n_list **a);
-void ft_rrb(n_list **b);
-void ft_rrr(n_list **a, n_list **b);
-int find_max(n_list *a);
-int find_median(n_list *a);
-void sort_b(n_list *b);
-void pop(n_list *a, n_list *b);
-int sorted(n_list *a, n_list *b, int orig_len);
-n_list *up_to_3(n_list *a);
-n_list *up_to_5(n_list *a, n_list *b);
-void create_list(n_list *list_a, int argc, char *argv[]);
+void				least_moves(t_lst **a, t_lst *b);
+t_lst				*pushback(t_lst *a, t_lst *b);
+void				split_chunks(t_lst **a, t_lst **b, int i);
+t_lst				*up_to_500(t_lst *a, t_lst *b);
+t_lst				*lstnew(int content);
+void				lstadd_front(t_lst **lst, t_lst *new);
+t_lst				*lstlast(t_lst *lst);
+void				lstadd_back(t_lst **lst, t_lst *new);
+int					lstsize(t_lst *lst);
+void				free_list(t_lst **lst);
+int					find_max(t_lst *a);
+int					find_min(t_lst *a);
+int					sorted(t_lst *a);
+long int			ft_atol(const char *nptr);
+char				print_error(int argc, char **args);
+int					duplicate_check(char **args);
+int					error_handling(char **args);
+t_lst				*error_mgm(int argc, char *argv[], t_lst *a);
+void				ft_swap(t_lst **lst, char c);
+void				ft_pa(t_lst **a, t_lst **b);
+void				ft_pb(t_lst **a, t_lst **b);
+void				ft_ra(t_lst **a, char c);
+void				ft_rra(t_lst **a, char c);
+t_lst				*up_to_3(t_lst *a);
+void				cheapest(t_lst **a);
+t_lst				*up_to_5(t_lst *a, t_lst *b);
+void				free_array(char **arr);
+t_lst				*create_list(int argc, char **args, t_lst *a);
 
 #endif

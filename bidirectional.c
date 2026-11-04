@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bidirectional.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrumpfhu <nrumpfhu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 22:18:09 by nrumpfhu          #+#    #+#             */
+/*   Updated: 2024/12/05 18:23:20 by nrumpfhu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-n_list	*lstnew(int content)
+t_lst	*lstnew(int content)
 {
-	n_list	*first;
+	t_lst	*first;
 
-	first = (n_list *)malloc(sizeof(n_list));
+	first = (t_lst *)malloc(sizeof(t_lst));
 	if (first == NULL)
 		return (NULL);
 	first->content = content;
 	first->next = NULL;
-    first->prev = NULL;
+	first->prev = NULL;
 	return (first);
 }
 
-void	lstadd_front(n_list **lst, n_list *new)
+void	lstadd_front(t_lst **lst, t_lst *new)
 {
 	if (!*lst)
 	{
@@ -27,9 +39,21 @@ void	lstadd_front(n_list **lst, n_list *new)
 	(*lst)->prev = new;
 	*lst = new;
 }
-void	lstadd_back(n_list **lst, n_list *new)
+
+t_lst	*lstlast(t_lst *lst)
 {
-	n_list	*current;
+	if (lst != NULL)
+	{
+		while (lst->next != NULL)
+			lst = lst->next;
+		return (lst);
+	}
+	return (NULL);
+}
+
+void	lstadd_back(t_lst **lst, t_lst *new)
+{
+	t_lst	*current;
 
 	if (*lst != NULL)
 	{
@@ -41,26 +65,18 @@ void	lstadd_back(n_list **lst, n_list *new)
 		*lst = new;
 }
 
-n_list	*lstlast(n_list *lst)
+void	free_list(t_lst **lst)
 {
-	if (lst != NULL)
-	{
-		while (lst->next != NULL)
-			lst = lst->next;
-		return (lst);
-	}
-	return (NULL);
-}
+	t_lst	*temp;
+	t_lst	*head;
 
-int	lstsize(n_list *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst != NULL)
+	if (!lst)
+		return ;
+	head = *lst;
+	while (head)
 	{
-		lst = lst->next;
-		i++;
+		temp = head;
+		head = head->next;
+		free(temp);
 	}
-	return (i);
 }

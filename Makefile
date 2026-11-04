@@ -1,5 +1,5 @@
 # Define variables
-NAME = push_swap.a
+NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -9,7 +9,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I $(LIBFT_DIR) -I .
 
 # Source files
-SRC = push_swap.c operations.c helpers.c bidirectional.c tester.c
+SRC = algo_5.c algo_500.c main.c operations.c helpers.c bidirectional.c tester.c
 
 OBJ = $(SRC:.c=.o)
 
